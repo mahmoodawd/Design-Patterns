@@ -1,18 +1,19 @@
 package dev.awd;
 
-import dev.awd.iterator.excercise.ProfileIterator;
-import dev.awd.iterator.excercise.SocialMediaIterableCollection;
+import dev.awd.chainofresponsibility.*;
 
 public class Main {
     public static void main(String[] args) {
 
+        MiddlewareHandler authentication = new AuthenticationMiddleware();
+        MiddlewareHandler authorization = new AuthorizationMiddleware();
+        MiddlewareHandler securityChecks = new SecurityChecksMiddleware();
 
-        SocialMediaIterableCollection collection = new SocialMediaIterableCollection("1");
-        ProfileIterator iterator = collection.CreateFriendsProfileIterator();
-        while (iterator.hasNext()) {
+        authentication.setNext(authorization).setNext(securityChecks);
 
-            System.out.println(iterator.getNext().getName());
-        }
-
+        RequestProcessor requestProcessor = new RequestProcessor(authentication);
+        Request request = new Request(RequestType.GET, false, true, false);
+        Response response = requestProcessor.processRequest(request);
+        System.out.println(response.isSucceeded() + ": " + response.getBody());
     }
 }
