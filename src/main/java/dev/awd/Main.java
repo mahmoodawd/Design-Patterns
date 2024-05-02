@@ -1,19 +1,19 @@
 package dev.awd;
 
-import dev.awd.chainofresponsibility.*;
+import dev.awd.chainofresponsibility.excercise.*;
 
 public class Main {
     public static void main(String[] args) {
+        DataProcessingChainHandler validationCheck = new ValidationChecksHandler();
+        DataProcessingChainHandler formattingCheck = new FormattingChecksHandler();
+        DataProcessingChainHandler dataSizeCheck = new DataSizeHandler();
+        DataProcessingChainHandler personalInfoCheck = new PersonalInfoHandler();
 
-        MiddlewareHandler authentication = new AuthenticationMiddleware();
-        MiddlewareHandler authorization = new AuthorizationMiddleware();
-        MiddlewareHandler securityChecks = new SecurityChecksMiddleware();
+        validationCheck.setNext(formattingCheck).setNext(dataSizeCheck).setNext(personalInfoCheck);
 
-        authentication.setNext(authorization).setNext(securityChecks);
-
-        RequestProcessor requestProcessor = new RequestProcessor(authentication);
-        Request request = new Request(RequestType.GET, false, true, false);
-        Response response = requestProcessor.processRequest(request);
-        System.out.println(response.isSucceeded() + ": " + response.getBody());
+        Data data = new Data(true, true, true, false);
+        DataProcessor processor = new DataProcessor(validationCheck);
+        DataResponse response = processor.processData(data);
+        System.out.println(response.isSuccess() + ": " + response.getResult());
     }
 }
