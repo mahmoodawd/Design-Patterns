@@ -1,16 +1,18 @@
 package dev.awd;
 
-import dev.awd.state.Order;
-import dev.awd.state.OrderManagement;
+import dev.awd.state.excercise.Task;
+import dev.awd.state.excercise.TaskManagement;
 
 public class Main {
     public static void main(String[] args) {
-        OrderManagement orderManagement = new OrderManagement(
-                new Order("Jacket", 550.50));
+        TaskManagement taskManagement = new TaskManagement(new Task("Study DS"));
 
-        orderManagement.processOrder();
-        orderManagement.shipOrder();
-        orderManagement.deliverOrder();
-        orderManagement.cancelOrder();
+
+        taskManagement.markAsToDo();
+        taskManagement.markAsInProgress();
+        taskManagement.markAsInReview();
+        taskManagement.markAsDone();
+        taskManagement.blockTask();
+
     }
 }
