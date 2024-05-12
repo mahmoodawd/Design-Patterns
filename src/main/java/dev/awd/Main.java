@@ -1,22 +1,20 @@
 package dev.awd;
 
-import dev.awd.mediator.ChatManagement;
-import dev.awd.mediator.ChatMediator;
-import dev.awd.mediator.User;
+import dev.awd.mediator.excercise.*;
 
 public class Main {
     public static void main(String[] args) {
-        ChatMediator chatManagement = new ChatManagement();
+        TrafficController controller = new AirTrafficController();
 
-        User mahmoud = new User("Mahmoud", chatManagement);
-        User ali = new User("Ali", chatManagement);
-        User khaled = new User("Khaled", chatManagement);
+        Airplane commercialAirplane = new CommercialAirplane(controller);
+        Airplane TravelAirplane = new TravelAirplane(controller);
 
-        chatManagement.registerUserToGroup(mahmoud, "Friends");
-        chatManagement.registerUserToGroup(ali, "Friends");
-        chatManagement.registerUserToGroup(khaled, "Friends");
+        controller.register(commercialAirplane);
+        controller.register(TravelAirplane);
 
-        mahmoud.sendGroupMessage("Hello Everyone", "Friends");
+        commercialAirplane.requestTakeoff();
+        TravelAirplane.requestLanding();
+
 
     }
 }
