@@ -1,27 +1,17 @@
 package dev.awd;
 
-import dev.awd.command.*;
+import dev.awd.command.excercise.CopyCommand;
+import dev.awd.command.excercise.DeleteCommand;
+import dev.awd.command.excercise.TextEditor;
 
 public class Main {
     public static void main(String[] args) {
-        Light livingRoomLight = new Light("Living Room");
-        Door frontDoor = new Door("Front Door");
-        Tv tv = new Tv("TV");
-        SmartHomeVoiceAssistant smartHomeVoiceAssistant = new SmartHomeVoiceAssistant();
-        SmartHomeMobileApplication smartHomeApplication = new SmartHomeMobileApplication();
+        String fileContent = "This is the file content regarding the command design pattern exercise";
 
-        smartHomeApplication.executeCommand(new TurnOnLightCommand(livingRoomLight));
-        smartHomeApplication.executeCommand(new TurnOnTvCommand(tv));
-        smartHomeApplication.executeCommand(new UnLockDoorCommand(frontDoor));
+        TextEditor textEditor = new TextEditor();
 
-        smartHomeVoiceAssistant.setCommand("turn_lights_off", new TurnOffLightCommand(livingRoomLight));
-        smartHomeVoiceAssistant.setCommand("switch_on_tv", new  TurnOnTvCommand(tv));
-        smartHomeVoiceAssistant.setCommand("unlock_door", new UnLockDoorCommand(frontDoor));
-
-        smartHomeVoiceAssistant.say("turn_lights_off");
-        smartHomeVoiceAssistant.say("switch_on_tv");
-        smartHomeVoiceAssistant.say("unlock_door");
-
+        textEditor.execute(new CopyCommand(fileContent));
+        textEditor.execute(new DeleteCommand(fileContent));
 
     }
 }
