@@ -1,17 +1,17 @@
 package dev.awd;
 
-import dev.awd.behavioral.command.excercise.CopyCommand;
-import dev.awd.behavioral.command.excercise.DeleteCommand;
-import dev.awd.behavioral.command.excercise.TextEditor;
+import dev.awd.structural.adapter.LegacyWeatherService;
+import dev.awd.structural.adapter.ThirdPartyWeatherService;
+import dev.awd.structural.adapter.WeatherServiceAdaptee;
+import dev.awd.structural.adapter.WeatherServiceAdapter;
 
 public class Main {
     public static void main(String[] args) {
-        String fileContent = "This is the file content regarding the command design pattern exercise";
+        ThirdPartyWeatherService api = new ThirdPartyWeatherService();
+        WeatherServiceAdapter legacyWeatherService = new WeatherServiceAdaptee(new LegacyWeatherService(api));
 
-        TextEditor textEditor = new TextEditor();
-
-        textEditor.execute(new CopyCommand(fileContent));
-        textEditor.execute(new DeleteCommand(fileContent));
+        String data = legacyWeatherService.getTemperature(45.3, 412.3);
+        System.out.println(data);
 
     }
 }
