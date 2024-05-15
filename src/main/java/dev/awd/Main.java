@@ -1,8 +1,8 @@
 package dev.awd;
 
-import dev.awd.command.excercise.CopyCommand;
-import dev.awd.command.excercise.DeleteCommand;
-import dev.awd.command.excercise.TextEditor;
+import dev.awd.behavioral.command.excercise.CopyCommand;
+import dev.awd.behavioral.command.excercise.DeleteCommand;
+import dev.awd.behavioral.command.excercise.TextEditor;
 
 public class Main {
     public static void main(String[] args) {
