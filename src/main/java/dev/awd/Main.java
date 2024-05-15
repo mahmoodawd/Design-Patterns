@@ -1,17 +1,13 @@
 package dev.awd;
 
-import dev.awd.structural.adapter.LegacyWeatherService;
-import dev.awd.structural.adapter.ThirdPartyWeatherService;
-import dev.awd.structural.adapter.WeatherServiceAdaptee;
-import dev.awd.structural.adapter.WeatherServiceAdapter;
+import dev.awd.structural.adapter.excercise.*;
 
 public class Main {
     public static void main(String[] args) {
-        ThirdPartyWeatherService api = new ThirdPartyWeatherService();
-        WeatherServiceAdapter legacyWeatherService = new WeatherServiceAdaptee(new LegacyWeatherService(api));
-
-        String data = legacyWeatherService.getTemperature(45.3, 412.3);
-        System.out.println(data);
-
+        ThirdPartyReportingService thirdPartyReportingService = new ThirdPartyReportingService();
+        CSVReportingService csvReportingService = new CSVReportingService(thirdPartyReportingService);
+        ReportDataAdapter reportDataAdapter = new ReportDataAdaptee(csvReportingService);
+        JSONReportData data = reportDataAdapter.generateJsonReport();
+        new DashboardService().generateDashboard(data);
     }
 }
