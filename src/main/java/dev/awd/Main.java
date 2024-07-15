@@ -1,13 +1,16 @@
 package dev.awd;
 
-import dev.awd.structural.adapter.excercise.*;
+
+import dev.awd.structural.bridge.*;
 
 public class Main {
     public static void main(String[] args) {
-        ThirdPartyReportingService thirdPartyReportingService = new ThirdPartyReportingService();
-        CSVReportingService csvReportingService = new CSVReportingService(thirdPartyReportingService);
-        ReportDataAdapter reportDataAdapter = new ReportDataAdaptee(csvReportingService);
-        JSONReportData data = reportDataAdapter.generateJsonReport();
-        new DashboardService().generateDashboard(data);
+        VideoProvider youtubeVideoProvider = new YoutubeVideoProvider(new HDVideoQuality());
+        VideoProvider twitchVideoProvider = new TwitchVideoProvider(new SDVideoQuality());
+
+
+        youtubeVideoProvider.playback("123");
+
+        twitchVideoProvider.playback("123");
     }
 }
