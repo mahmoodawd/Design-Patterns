@@ -1,18 +1,14 @@
 package dev.awd;
 
 
-import dev.awd.structural.decorator.*;
+import dev.awd.structural.decorator.exercise.Bold;
+import dev.awd.structural.decorator.exercise.Italic;
+import dev.awd.structural.decorator.exercise.PlainText;
+import dev.awd.structural.decorator.exercise.Text;
 
 public class Main {
     public static void main(String[] args) {
-        Beverage coffeeWithMilkAndSugar = new SugarDecorator(new MilkDecorator(new Coffee()));
-
-
-        System.out.println(coffeeWithMilkAndSugar.prepare());
-
-        Beverage teaWithMilk = new MilkDecorator(new Tea());
-        System.out.println(teaWithMilk.prepare());
-        Beverage teaWithMint = new MintDecorator(new Tea());
-        System.out.println(teaWithMint.prepare());
+        Text boldItalicText = new Italic(new Bold(new PlainText("Some Text")));
+        System.out.println(boldItalicText.format());
     }
 }
