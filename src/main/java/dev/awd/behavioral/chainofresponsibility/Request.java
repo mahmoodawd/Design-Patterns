@@ -1,4 +1,4 @@
-package dev.awd.behavioral.chainofresponsibility.excercise;
+package dev.awd.behavioral.chainofresponsibility;
 
 public class Request {
     private RequestType type;

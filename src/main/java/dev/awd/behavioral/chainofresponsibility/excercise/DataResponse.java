@@ -1,4 +1,4 @@
-package dev.awd.behavioral.chainofresponsibility.excercise.excercise;
+package dev.awd.behavioral.chainofresponsibility.excercise;
 
 public class DataResponse {
     private String result;

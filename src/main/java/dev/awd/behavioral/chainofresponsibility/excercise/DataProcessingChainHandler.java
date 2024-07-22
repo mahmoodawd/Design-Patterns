@@ -1,4 +1,4 @@
-package dev.awd.behavioral.chainofresponsibility.excercise.excercise;
+package dev.awd.behavioral.chainofresponsibility.excercise;
 
 public interface DataProcessingChainHandler {
     DataProcessingChainHandler setNext(DataProcessingChainHandler next);

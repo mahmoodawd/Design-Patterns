@@ -1,6 +1,6 @@
 package dev.awd.ultimate;
 
-import dev.awd.behavioral.chainofresponsibility.excercise.RequestType;
+import dev.awd.behavioral.chainofresponsibility.RequestType;
 
 public class HttpRequest {
     private RequestType type;
