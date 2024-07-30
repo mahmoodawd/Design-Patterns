@@ -1,14 +1,25 @@
 package dev.awd;
 
 
-import dev.awd.structural.decorator.exercise.Bold;
-import dev.awd.structural.decorator.exercise.Italic;
-import dev.awd.structural.decorator.exercise.PlainText;
-import dev.awd.structural.decorator.exercise.Text;
+import dev.awd.structural.facade.TravelBookingFacade;
+import dev.awd.structural.facade.Trip;
 
 public class Main {
     public static void main(String[] args) {
-        Text boldItalicText = new Italic(new Bold(new PlainText("Some Text")));
-        System.out.println(boldItalicText.format());
+        TravelBookingFacade travelBookingFacade = new TravelBookingFacade();
+        Trip trip = new Trip("Amsterdam",
+                "Madrid",
+                "2024-08-01",
+                "A50",
+                "2024-08-01",
+                "2024-08-05",
+                "Airport",
+                "2024-08-01",
+                "2024-08-05",
+                10000,
+                "Cash");
+        travelBookingFacade.bookTrip(trip);
+
+
     }
 }
