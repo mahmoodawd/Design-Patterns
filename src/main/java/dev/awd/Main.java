@@ -1,22 +1,21 @@
 package dev.awd;
 
 
-import dev.awd.structural.facade.exercise.OrderDetails;
-import dev.awd.structural.facade.exercise.OrderFacade;
+import dev.awd.structural.proxy.DummyJsonApi;
+import dev.awd.structural.proxy.DummyJsonCachingProxy;
 
 public class Main {
     public static void main(String[] args) {
-        OrderFacade orderFacade = new OrderFacade();
-        OrderDetails orderDetails = new OrderDetails(
-                "A256",
-                "DA4582",
-                "Mobile Phone",
-                25,
-                10500.0,
-                "Visa"
-        );
-
-        orderFacade.placeOrder(orderDetails);
+        try {
+            DummyJsonApi proxy = new DummyJsonCachingProxy();
+            System.out.println(proxy.getAllProducts());
+            System.out.println(proxy.getAllRecipes());
+            System.out.println("Should Get Results From Cache");
+            System.out.println(proxy.getAllProducts());
+            System.out.println(proxy.getAllRecipes());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 }
