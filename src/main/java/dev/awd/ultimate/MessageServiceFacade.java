@@ -2,7 +2,7 @@ package dev.awd.ultimate;
 
 public class MessageServiceFacade {
 
-    ThirdPartyMessageHandlerAPI api;
+    MessageHandlerApi api;
     MessageRepository messageRepository;
     MessageAnalysisService analysisService;
     MessageFormatter formatter;
@@ -19,6 +19,6 @@ public class MessageServiceFacade {
         String formattedMessage = formatter.format(message);
         analysisService.analyzeUnFormattedMessage(formattedMessage);
         messageRepository.saveMessage(formattedMessage);
-        return api.processMessage(formattedMessage);
+        return api.handleMessage(formattedMessage);
     }
 }
