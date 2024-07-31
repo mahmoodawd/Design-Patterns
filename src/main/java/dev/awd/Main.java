@@ -1,21 +1,17 @@
 package dev.awd;
 
 
-import dev.awd.structural.proxy.DummyJsonApi;
-import dev.awd.structural.proxy.DummyJsonCachingProxy;
+import dev.awd.structural.proxy.exercise.StreamingService;
+import dev.awd.structural.proxy.exercise.User;
+import dev.awd.structural.proxy.exercise.VideoStreamingProxy;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            DummyJsonApi proxy = new DummyJsonCachingProxy();
-            System.out.println(proxy.getAllProducts());
-            System.out.println(proxy.getAllRecipes());
-            System.out.println("Should Get Results From Cache");
-            System.out.println(proxy.getAllProducts());
-            System.out.println(proxy.getAllRecipes());
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+        User user = new User("Mahmood");
+        user.subscribe("DP101");
+        StreamingService streamingService = new VideoStreamingProxy(user);
+
+        streamingService.startStream("Java202");
 
     }
 }
