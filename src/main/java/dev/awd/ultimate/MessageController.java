@@ -1,5 +1,7 @@
 package dev.awd.ultimate;
 
+import java.util.Map;
+
 public class MessageController {
     private final MiddlewareHandler middlewareHandler;
     private final MessageServiceFacade messageServiceFacade;
@@ -9,12 +11,20 @@ public class MessageController {
         this.messageServiceFacade = messageServiceFacade;
     }
 
-    public boolean handleMessage(HttpRequest message) {
+    public HttpResponse handleMessage(HttpRequest message) {
         HttpResponse middlewareResponse = middlewareHandler.handle(message);
-        if (!middlewareResponse.isSucceeded()) {
-            return  false;
+        if (middlewareResponse.isHasError()) {
+            return new HttpResponse.HttpResponseBuilder()
+                    .setHasError()
+                    .setErrorMessage("Request Failed")
+                    .setStatusCode(404)
+                    .setHeadersMap(Map.of("content-type", "application/json"))
+                    .build();
         }
         String handlerResponse = messageServiceFacade.handle(message.getBody());
-        return true;
+        return new HttpResponse.HttpResponseBuilder()
+                .setStatusCode(200)
+                .setBody(handlerResponse)
+                .build();
     }
 }
