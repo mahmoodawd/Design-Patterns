@@ -6,7 +6,7 @@ public class AuthenticationMiddleware extends AbstractMiddlewareHandler {
     public HttpResponse handle(HttpRequest request) {
         System.out.println("Checking Authentication......");
         if (!request.getUser().isAuthenticated()) {
-            return new HttpResponse(request.getUser().username() + " Not Authenticated", false);
+            return new HttpResponse.HttpResponseBuilder().setBody(request.getUser().username() + " Not Authenticated").setHasError().build();
         }
         return super.handle(request);
     }

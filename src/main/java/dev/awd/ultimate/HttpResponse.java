@@ -9,7 +9,7 @@ public final class HttpResponse {
     private final int statusCode;
     private final Map<String, String> headers;
 
-    public HttpResponse(HttpResponseBuilder builder) {
+    private HttpResponse(HttpResponseBuilder builder) {
         this.body = builder.body;
         this.errorMessage = builder.errorMessage;
         this.hasError = builder.hasError;

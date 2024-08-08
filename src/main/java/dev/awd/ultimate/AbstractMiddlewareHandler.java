@@ -16,6 +16,6 @@ public abstract class AbstractMiddlewareHandler implements MiddlewareHandler {
         if (next != null) {
             return next.handle(request);
         }
-        return new HttpResponse("Passed", true);
+        return new HttpResponse.HttpResponseBuilder().setBody("Passed").setStatusCode(200).build();
     }
 }

@@ -1,18 +1,15 @@
 package dev.awd;
 
 
-import dev.awd.creational.builder.exercise.ConfigurationManager;
+import dev.awd.creational.singleton.LogLevel;
+import dev.awd.creational.singleton.Logger;
 
 public class Main {
     public static void main(String[] args) {
 
-        ConfigurationManager configurationManager = new ConfigurationManager.GameConfigurationBuilder()
-                .enableSound()
-                .enableNotification()
-                .setControlScheme("JoyStick")
-                .setDisplayMode("60 FPS")
-                .build();
-
-        System.out.println(configurationManager.getControlScheme());
+        Logger logger =  Logger.getLogger();
+        logger.setLogLevel(LogLevel.ERROR);
+        logger.info("Hello World! info");
+        logger.error("Hello World! Error");
     }
 }
