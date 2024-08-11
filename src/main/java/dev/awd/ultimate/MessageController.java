@@ -5,6 +5,7 @@ import java.util.Map;
 public class MessageController {
     private final MiddlewareHandler middlewareHandler;
     private final MessageServiceFacade messageServiceFacade;
+    private final static Logger logger = Logger.getLogger(MessageController.class.getName());
 
     public MessageController(MiddlewareHandler middlewareHandler, MessageServiceFacade messageServiceFacade) {
         this.middlewareHandler = middlewareHandler;
@@ -13,7 +14,9 @@ public class MessageController {
 
     public HttpResponse handleMessage(HttpRequest message) {
         HttpResponse middlewareResponse = middlewareHandler.handle(message);
+
         if (middlewareResponse.isHasError()) {
+            logger.error("an error occurred while handling message");
             return new HttpResponse.HttpResponseBuilder()
                     .setHasError()
                     .setErrorMessage("Request Failed")
@@ -22,6 +25,7 @@ public class MessageController {
                     .build();
         }
         String handlerResponse = messageServiceFacade.handle(message.getBody());
+        logger.info("Message handled: " + handlerResponse);
         return new HttpResponse.HttpResponseBuilder()
                 .setStatusCode(200)
                 .setBody(handlerResponse)
