@@ -1,6 +1,6 @@
 package dev.awd.creational.factory;
 
-public class AmericaExpress extends PaymentMethod {
+public class AmericaExpress extends InternationalPaymentMethod {
     public AmericaExpress(String cardNumber, String expiryMonth, String expiryYear, String cvv, String cardHolderName) {
         super(cardNumber, expiryMonth, expiryYear, cvv, cardHolderName);
     }

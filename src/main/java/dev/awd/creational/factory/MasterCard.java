@@ -1,6 +1,6 @@
 package dev.awd.creational.factory;
 
-public class MasterCard extends PaymentMethod {
+public class MasterCard extends InternationalPaymentMethod {
     public MasterCard(String cardNumber, String expiryMonth, String expiryYear, String cvv, String cardHolderName) {
         super(cardNumber, expiryMonth, expiryYear, cvv, cardHolderName);
     }
