@@ -1,14 +1,15 @@
 package dev.awd;
 
-import dev.awd.creational.factory.CardType;
-import dev.awd.creational.factory.LocalPaymentMethodFactory;
-import dev.awd.creational.factory.PaymentProcessor;
+import dev.awd.creational.factory.exercise.AuthManager;
+import dev.awd.creational.factory.exercise.Authentication;
+import dev.awd.creational.factory.exercise.UserPasswordAuthFactory;
 
 public class Main {
     public static void main(String[] args) {
-        PaymentProcessor paymentProcessor = new PaymentProcessor(new LocalPaymentMethodFactory());
+        AuthManager authManager = new AuthManager(new UserPasswordAuthFactory());
 
-        paymentProcessor.processPayment(CardType.MEEZA, "Mahmoud", "2513325165", "142", "07", "25", 2500.0);
+        Authentication authentication = authManager.getAuthentication();
+        authentication.authenticate();
 
 
     }
