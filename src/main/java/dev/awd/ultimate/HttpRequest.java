@@ -1,11 +1,10 @@
 package dev.awd.ultimate;
 
-import dev.awd.behavioral.chainofresponsibility.RequestType;
 
 public class HttpRequest {
+    private final User user;
     private RequestType type;
     private String body;
-    private User user;
 
 
     public HttpRequest(RequestType type, String body, User user) {

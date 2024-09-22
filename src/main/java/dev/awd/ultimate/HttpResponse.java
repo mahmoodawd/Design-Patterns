@@ -44,7 +44,7 @@ public final class HttpResponse {
         private int statusCode;
         private Map<String, String> headers;
 
-        public HttpResponseBuilder setBody(String errorMessage) {
+        public HttpResponseBuilder setBody(String body) {
             this.body = body;
             return this;
         }

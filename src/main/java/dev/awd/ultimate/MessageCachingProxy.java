@@ -3,9 +3,9 @@ package dev.awd.ultimate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MessageCachingProxy implements MessageHandlerApi {
+public class MessageCachingProxy implements CachingProxy {
     private final MessageHandlerApi api;
-    private Map<String, String> cache;
+    private final Map<String, String> cache;
 
     public MessageCachingProxy() {
         api = new ThirdPartyMessageHandlerAPI();
@@ -18,9 +18,9 @@ public class MessageCachingProxy implements MessageHandlerApi {
         if (cache.containsKey(message)) {
             return cache.get(message);
         }
-        String handleMessage = api.handleMessage(message);
-        cache.put(message, handleMessage);
-        return handleMessage;
+        String handledMessage = api.handleMessage(message);
+        cache.put(message, handledMessage);
+        return handledMessage;
     }
 }
 

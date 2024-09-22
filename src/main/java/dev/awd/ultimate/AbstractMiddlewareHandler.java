@@ -8,14 +8,14 @@ public abstract class AbstractMiddlewareHandler implements MiddlewareHandler {
     @Override
     public MiddlewareHandler setNext(MiddlewareHandler handler) {
         this.next = handler;
-        return handler;
+        return next;
     }
 
     @Override
-    public HttpResponse handle(HttpRequest request) {
+    public MiddlewareHandlerResponse handle(HttpRequest request) {
         if (next != null) {
-            return next.handle(request);
+            next.handle(request);
         }
-        return new HttpResponse.HttpResponseBuilder().setBody("Passed").setStatusCode(200).build();
+        return new MiddlewareHandlerResponse("Request successfully passed all middlewares", true);
     }
 }

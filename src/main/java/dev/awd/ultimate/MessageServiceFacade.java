@@ -2,23 +2,30 @@ package dev.awd.ultimate;
 
 public class MessageServiceFacade {
 
-    MessageHandlerApi api;
+    private static final Logger logger = Logger.getLogger();
+    private static final String TAG = MessageServiceFacade.class.getName();
+    CachingProxy messageCachingProxy;
     MessageRepository messageRepository;
     MessageAnalysisService analysisService;
-    MessageFormatter formatter;
 
-    public MessageServiceFacade(ThirdPartyMessageHandlerAPI api, MessageRepository messageRepository, MessageAnalysisService analysisService, MessageFormatter formatter) {
-        this.api = api;
+    public MessageServiceFacade(CachingProxy messageCachingProxy, MessageRepository messageRepository, MessageAnalysisService analysisService) {
+        this.messageCachingProxy = messageCachingProxy;
         this.messageRepository = messageRepository;
         this.analysisService = analysisService;
-        this.formatter = formatter;
     }
 
     public String handle(String message) {
-        analysisService.analyzeFormattedMessage(message);
-        String formattedMessage = formatter.format(message);
-        analysisService.analyzeUnFormattedMessage(formattedMessage);
+        logger.info(TAG, "Start Unformatted Message Analysis");
+        analysisService.analyzeUnFormattedMessage(message);
+        logger.info(TAG, "Start formatted Message Analysis");
+        MessageFormatter messageFormatter = MessageFormatterFactory
+                .getMessageFormatter(message);
+        String formattedMessage = messageFormatter
+                .formatMessage(message);
+        analysisService.analyzeFormattedMessage(formattedMessage);
+        logger.info(TAG, "Saving Message to DB");
         messageRepository.saveMessage(formattedMessage);
-        return api.handleMessage(formattedMessage);
+        logger.info(TAG, "Processing Message");
+        return messageCachingProxy.handleMessage(formattedMessage);
     }
 }

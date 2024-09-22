@@ -2,7 +2,7 @@ package dev.awd.ultimate;
 
 public interface MessageFormatter {
 
-    public String format(String messageToFormat);
+    String formatMessage(String messageToFormat);
 
-    public String getType();
+    String getType();
 }

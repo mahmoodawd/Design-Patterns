@@ -8,6 +8,6 @@ public class XMLMessageFormatter extends AbstractMessageFormatter {
 
     @Override
     public String getType() {
-        return "XML-Type";
+        return MessageFormat.XML;
     }
 }

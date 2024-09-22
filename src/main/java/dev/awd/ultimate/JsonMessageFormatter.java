@@ -8,6 +8,6 @@ public class JsonMessageFormatter extends AbstractMessageFormatter {
 
     @Override
     public String getType() {
-        return "JSON-Type";
+        return MessageFormat.JSON;
     }
 }

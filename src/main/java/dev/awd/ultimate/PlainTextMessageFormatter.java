@@ -8,6 +8,6 @@ public class PlainTextMessageFormatter extends AbstractMessageFormatter {
 
     @Override
     public String getType() {
-        return "PlainText-Type";
+        return MessageFormat.PLAIN_TEXT;
     }
 }

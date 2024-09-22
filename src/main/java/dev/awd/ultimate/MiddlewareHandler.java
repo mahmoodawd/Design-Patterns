@@ -5,6 +5,6 @@ public interface MiddlewareHandler {
 
     MiddlewareHandler setNext(MiddlewareHandler middlewareHandler);
 
-    HttpResponse handle(HttpRequest request);
+    MiddlewareHandlerResponse handle(HttpRequest request);
 
 }
